@@ -64,9 +64,7 @@ $filterResult = $products->filter(function (Product $product) {
 });
 
 // Or filter by property, this will have the same result
-$filterByPropertyResult = $products->filterByProperty('name', function (Product $product) {
-    return $product->getName() === 'Test SP83913';
-});
+$filterByPropertyResult = $products->filterByProperty('name', 'Test SP83913');
 
 // Get product attribute
 $productResource->getAllAttributes();
