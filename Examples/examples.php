@@ -64,7 +64,9 @@ $filterResult = $products->filter(function (Product $product) {
 });
 
 // Or filter by property, this will have the same result
-$filterByPropertyResult = $products->filterByProperty('name', $products);
+$filterByPropertyResult = $products->filterByProperty('name', function (Product $product) {
+    return $product->getName() === 'Test SP83913';
+});
 
 // Get product attribute
 $productResource->getAllAttributes();
@@ -99,12 +101,11 @@ $productResource->remove($updateProduct->getId());
 
 
 
-/** @var Product $newProduct */
 $productList = $productResource->list();
 var_dump("LIST");
 var_dump($productList->count());
-//dd($productList->toArray());
-// Batch update products using collection
+
+/** @var Product $newProduct */
 $newProduct = $productList->first();
 $newProduct->setName('NEW SP'.rand(1, 100000));
 $newProduct->setCode('TO'.rand(1, 100000));
